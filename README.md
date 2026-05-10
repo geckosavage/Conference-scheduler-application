@@ -74,19 +74,6 @@ sqlite3 var/data.db < data/seed.sql
 - User: `student@conference.local`
 - Password for seeded accounts: `password`
 
-## Team Git Workflow
-
-To satisfy the coursework source-control requirement:
-
-- Use a public GitHub or Bitbucket repository.
-- Keep at most 3 team members.
-- Each member should contribute at least 10 meaningful commits.
-- Each member should commit on at least 3 different days.
-- Recommended branch split:
-  - Member 1: authentication, home, user features
-  - Member 2: conferences, sessions, rooms
-  - Member 3: speakers, registrations, admin dashboard
-
 ## Git Init And Repository Setup
 
 To initialize and publish the repository:
