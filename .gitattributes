@@ -1,0 +1,5 @@
+* text=auto eol=lf
+
+*.php diff=php
+*.twig text
+*.sql text
