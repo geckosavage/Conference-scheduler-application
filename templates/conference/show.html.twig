@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ conference.title }} | Conference Scheduler{% endblock %}
+
+{% block body %}
+    <article class="card">
+        <span class="badge">{{ conference.status|capitalize }}</span>
+        <h1>{{ conference.title }}</h1>
+        <p class="meta">{{ conference.venue }} | {{ conference.startDate|date('d M Y') }} - {{ conference.endDate|date('d M Y') }}</p>
+        <p>{{ conference.description }}</p>
+
+        <div class="actions">
+            <a class="button" href="{{ path('conference_schedule', {id: conference.id}) }}">View Schedule</a>
+            <a class="button" href="{{ path('session_index') }}">All Sessions</a>
+        </div>
+    </article>
+{% endblock %}

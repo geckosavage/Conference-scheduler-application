@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ conference.title }} Schedule{% endblock %}
+
+{% block body %}
+    <div class="section-title">
+        <h1>{{ conference.title }} Schedule</h1>
+        <a class="button" href="{{ path('conference_show', {id: conference.id}) }}">Back to Conference</a>
+    </div>
+
+    {% for day, sessions in groupedSessions %}
+        <div class="table-card" style="margin-bottom: 20px;">
+            <h2>{{ day|date('d M Y') }}</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Time</th>
+                        <th>Session</th>
+                        <th>Room</th>
+                        <th>Speakers</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for session in sessions %}
+                        <tr>
+                            <td>{{ session.startTime|date('H:i') }} - {{ session.endTime|date('H:i') }}</td>
+                            <td><a href="{{ path('session_show', {id: session.id}) }}">{{ session.title }}</a></td>
+                            <td>{{ session.room.name }}</td>
+                            <td>
+                                {% for speaker in session.speakers %}
+                                    {{ speaker.fullName }}{% if not loop.last %}, {% endif %}
+                                {% endfor %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <div class="card">
+            <p class="meta">No scheduled sessions yet.</p>
+        </div>
+    {% endfor %}
+{% endblock %}

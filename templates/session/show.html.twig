@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ session.title }} | Conference Scheduler{% endblock %}
+
+{% block body %}
+    <article class="card">
+        <span class="badge">{{ session.track }}</span>
+        <h1>{{ session.title }}</h1>
+        <p class="meta">
+            {{ session.conference.title }} | {{ session.startTime|date('d M Y H:i') }} - {{ session.endTime|date('H:i') }} |
+            {{ session.room.name }} (Capacity: {{ session.room.capacity }})
+        </p>
+        <p>{{ session.description }}</p>
+
+        <h3>Speakers</h3>
+        <ul>
+            {% for speaker in session.speakers %}
+                <li><a href="{{ path('speaker_show', {id: speaker.id}) }}">{{ speaker.fullName }}</a> - {{ speaker.expertise }}</li>
+            {% else %}
+                <li>No speakers assigned yet.</li>
+            {% endfor %}
+        </ul>
+
+        <div class="actions">
+            {% if app.user %}
+                <a class="button" href="{{ path('registration_create', {id: session.id}) }}">Register for this Session</a>
+            {% endif %}
+            <a class="button" href="{{ path('conference_schedule', {id: session.conference.id}) }}">Back to Schedule</a>
+        </div>
+    </article>
+{% endblock %}

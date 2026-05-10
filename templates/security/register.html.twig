@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register | Conference Scheduler{% endblock %}
+
+{% block body %}
+    <div class="card" style="max-width: 700px; margin: 0 auto;">
+        <h1>Create Attendee Account</h1>
+        {{ form_start(registrationForm) }}
+            {{ form_row(registrationForm.fullName) }}
+            {{ form_row(registrationForm.email) }}
+            {{ form_row(registrationForm.password) }}
+            <button type="submit">Create Account</button>
+        {{ form_end(registrationForm) }}
+    </div>
+{% endblock %}

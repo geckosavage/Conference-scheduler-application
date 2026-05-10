@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sessions | Conference Scheduler{% endblock %}
+
+{% block body %}
+    <div class="section-title">
+        <h1>Sessions</h1>
+        {% if selectedTrack %}
+            <span class="badge">Track: {{ selectedTrack }}</span>
+        {% endif %}
+    </div>
+
+    <div class="grid grid-2">
+        {% for session in sessions %}
+            <article class="card">
+                <span class="badge">{{ session.track }}</span>
+                <h3><a href="{{ path('session_show', {id: session.id}) }}">{{ session.title }}</a></h3>
+                <p class="meta">{{ session.conference.title }}</p>
+                <p>{{ session.description|slice(0, 140) }}...</p>
+                <p class="meta">{{ session.startTime|date('d M Y H:i') }} - {{ session.endTime|date('H:i') }} | {{ session.room.name }}</p>
+                <div class="actions">
+                    <a class="button" href="{{ path('session_show', {id: session.id}) }}">Details</a>
+                    {% if app.user %}
+                        <a class="button" href="{{ path('registration_create', {id: session.id}) }}">Register</a>
+                    {% endif %}
+                </div>
+            </article>
+        {% else %}
+            <article class="card">
+                <p class="meta">No sessions found.</p>
+            </article>
+        {% endfor %}
+    </div>
+{% endblock %}

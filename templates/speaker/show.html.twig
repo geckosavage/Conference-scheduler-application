@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ speaker.fullName }} | Conference Scheduler{% endblock %}
+
+{% block body %}
+    <article class="card">
+        {% if speaker.avatarUrl %}
+            <img class="speaker-avatar speaker-avatar-large" src="{{ speaker.avatarUrl }}" alt="{{ speaker.fullName }}">
+        {% endif %}
+        <h1>{{ speaker.fullName }}</h1>
+        <p class="meta">{{ speaker.expertise }}</p>
+        <p>{{ speaker.biography }}</p>
+
+        <h3>Sessions</h3>
+        <ul>
+            {% for session in speaker.sessions %}
+                <li>
+                    <a href="{{ path('session_show', {id: session.id}) }}">{{ session.title }}</a>
+                    <span class="meta">({{ session.startTime|date('d M Y H:i') }})</span>
+                </li>
+            {% else %}
+                <li>No sessions assigned yet.</li>
+            {% endfor %}
+        </ul>
+    </article>
+{% endblock %}

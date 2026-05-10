@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Speakers | Conference Scheduler{% endblock %}
+
+{% block body %}
+    <div class="section-title">
+        <h1>Speakers</h1>
+        <span class="meta">{{ speakers|length }} profiles</span>
+    </div>
+
+    <div class="grid grid-2">
+        {% for speaker in speakers %}
+            <article class="card">
+                {% if speaker.avatarUrl %}
+                    <img class="speaker-avatar" src="{{ speaker.avatarUrl }}" alt="{{ speaker.fullName }}">
+                {% endif %}
+                <h3><a href="{{ path('speaker_show', {id: speaker.id}) }}">{{ speaker.fullName }}</a></h3>
+                <p class="meta">{{ speaker.expertise }}</p>
+                <p>{{ speaker.biography|slice(0, 150) }}...</p>
+                <a class="button" href="{{ path('speaker_show', {id: speaker.id}) }}">View Profile</a>
+            </article>
+        {% else %}
+            <article class="card">
+                <p class="meta">No speakers found.</p>
+            </article>
+        {% endfor %}
+    </div>
+{% endblock %}

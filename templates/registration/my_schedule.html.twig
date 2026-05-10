@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}My Schedule | Conference Scheduler{% endblock %}
+
+{% block body %}
+    <div class="section-title">
+        <h1>My Schedule</h1>
+        <span class="meta">{{ registrations|length }} registered sessions</span>
+    </div>
+
+    <div class="table-card">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Session</th>
+                    <th>Date & Time</th>
+                    <th>Room</th>
+                    <th>Status</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for registration in registrations %}
+                    <tr>
+                        <td>{{ registration.session.title }}</td>
+                        <td>{{ registration.session.startTime|date('d M Y H:i') }}</td>
+                        <td>{{ registration.session.room.name }}</td>
+                        <td><span class="badge">{{ registration.status }}</span></td>
+                        <td><a href="{{ path('registration_cancel', {id: registration.id}) }}">Cancel</a></td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="5" class="meta">You have not registered for any session yet.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

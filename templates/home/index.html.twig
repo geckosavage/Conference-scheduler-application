@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Home | Conference Scheduler{% endblock %}
+
+{% block body %}
+    <section class="hero">
+        <h1>Plan, publish, and manage conference sessions in one place</h1>
+        <p class="meta">This Symfony-based system helps admins manage conferences, rooms, speakers, and attendee registrations while giving students a clean way to browse events and build a personal schedule.</p>
+        <div class="actions">
+            <a class="button" href="{{ path('conference_index') }}">Explore Conferences</a>
+            <a class="button" href="{{ path('session_index') }}">Browse Sessions</a>
+        </div>
+    </section>
+
+    <section class="grid grid-2">
+        <article class="card">
+            <h3>Upcoming Conferences</h3>
+            {% for conference in featuredConferences %}
+                <p>
+                    <strong>{{ conference.title }}</strong><br>
+                    <span class="meta">{{ conference.venue }} | {{ conference.startDate|date('d M Y') }} - {{ conference.endDate|date('d M Y') }}</span>
+                </p>
+            {% else %}
+                <p class="meta">No conferences available yet.</p>
+            {% endfor %}
+        </article>
+
+        <article class="card">
+            <h3>Highlighted Sessions</h3>
+            {% for session in featuredSessions %}
+                <p>
+                    <strong><a href="{{ path('session_show', {id: session.id}) }}">{{ session.title }}</a></strong><br>
+                    <span class="meta">{{ session.startTime|date('d M Y H:i') }} | {{ session.room.name }}</span>
+                </p>
+            {% else %}
+                <p class="meta">No sessions available yet.</p>
+            {% endfor %}
+        </article>
+    </section>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Conferences | Conference Scheduler{% endblock %}
+
+{% block body %}
+    <div class="section-title">
+        <h1>Conferences</h1>
+        <span class="meta">{{ conferences|length }} total</span>
+    </div>
+
+    <div class="grid grid-2">
+        {% for conference in conferences %}
+            <article class="card">
+                <span class="badge">{{ conference.status|capitalize }}</span>
+                <h3>{{ conference.title }}</h3>
+                <p class="meta">{{ conference.venue }}</p>
+                <p>{{ conference.description|slice(0, 150) }}...</p>
+                <p class="meta">{{ conference.startDate|date('d M Y') }} - {{ conference.endDate|date('d M Y') }}</p>
+                <div class="actions">
+                    <a class="button" href="{{ path('conference_show', {id: conference.id}) }}">Details</a>
+                    <a class="button" href="{{ path('conference_schedule', {id: conference.id}) }}">Schedule</a>
+                </div>
+            </article>
+        {% else %}
+            <article class="card">
+                <p class="meta">No conferences found.</p>
+            </article>
+        {% endfor %}
+    </div>
+{% endblock %}
