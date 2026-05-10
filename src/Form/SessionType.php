@@ -1,0 +1,57 @@
+<?php
+
+namespace App\Form;
+
+use App\Entity\Conference;
+use App\Entity\Room;
+use App\Entity\Session;
+use App\Entity\Speaker;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+
+class SessionType extends AbstractType
+{
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        $builder
+            ->add('title', TextType::class)
+            ->add('description', TextareaType::class)
+            ->add('track', TextType::class)
+            ->add('status', ChoiceType::class, [
+                'choices' => [
+                    'Scheduled' => 'scheduled',
+                    'Completed' => 'completed',
+                    'Cancelled' => 'cancelled',
+                ],
+            ])
+            ->add('startTime', DateTimeType::class, ['widget' => 'single_text'])
+            ->add('endTime', DateTimeType::class, ['widget' => 'single_text'])
+            ->add('conference', EntityType::class, [
+                'class' => Conference::class,
+                'choice_label' => 'title',
+            ])
+            ->add('room', EntityType::class, [
+                'class' => Room::class,
+                'choice_label' => 'name',
+            ])
+            ->add('speakers', EntityType::class, [
+                'class' => Speaker::class,
+                'choice_label' => 'fullName',
+                'multiple' => true,
+                'by_reference' => false,
+            ]);
+    }
+
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults([
+            'data_class' => Session::class,
+        ]);
+    }
+}
