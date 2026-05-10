@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+    <div class="card" style="max-width: 780px;">
+        <h1>{{ title }}</h1>
+        {{ form_start(conferenceForm) }}
+            {{ form_widget(conferenceForm) }}
+            <button type="submit">Save Conference</button>
+        {{ form_end(conferenceForm) }}
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+<script>
+document.querySelector("form).addEventListener("submit", function(e)) {
+    let desc = document.querySelector("#conference_description").value;
+    let oldDesc "{{ oldDescription|e('js')}}";
+
+    if (desc.length <=100){
+        alert("Description must be more than 100 characters.");
+        e.preventDefault();
+    }else if (desc === oldDesc) {
+        alert("Description must be diff.");
+        e.preventDefault();
+    }
+
+});
+</script>
+{% endblock %}

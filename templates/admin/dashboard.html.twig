@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Admin Dashboard | Conference Scheduler{% endblock %}
+
+{% block body %}
+    <div class="section-title">
+        <h1>Admin Dashboard</h1>
+        <div class="actions">
+            <a class="button" href="{{ path('admin_conference_index') }}">Manage Conferences</a>
+            <a class="button" href="{{ path('admin_session_index') }}">Manage Sessions</a>
+            <a class="button" href="{{ path('admin_speaker_index') }}">Manage Speakers</a>
+            <a class="button" href="{{ path('admin_room_index') }}">Manage Rooms</a>
+        </div>
+    </div>
+
+    <section class="grid grid-3">
+        <article class="stat-card">
+            <h3>{{ conferenceCount }}</h3>
+            <p class="meta">Conferences</p>
+        </article>
+        <article class="stat-card">
+            <h3>{{ sessionCount }}</h3>
+            <p class="meta">Sessions</p>
+        </article>
+        <article class="stat-card">
+            <h3>{{ speakerCount }}</h3>
+            <p class="meta">Speakers</p>
+        </article>
+        <article class="stat-card">
+            <h3>{{ registrationCount }}</h3>
+            <p class="meta">Registrations</p>
+        </article>
+    </section>
+
+    <section class="table-card" style="margin-top: 22px;">
+        <h2>Recent Sessions</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Conference</th>
+                    <th>Time</th>
+                    <th>Room</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for session in recentSessions %}
+                    <tr>
+                        <td>{{ session.title }}</td>
+                        <td>{{ session.conference.title }}</td>
+                        <td>{{ session.startTime|date('d M Y H:i') }}</td>
+                        <td>{{ session.room.name }}</td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="4" class="meta">No sessions created yet.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+{% endblock %}

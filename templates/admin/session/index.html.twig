@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Manage Sessions{% endblock %}
+
+{% block body %}
+    <div class="section-title">
+        <h1>Manage Sessions</h1>
+        <a class="button" href="{{ path('admin_session_new') }}">New Session</a>
+    </div>
+
+    <div class="table-card">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Conference</th>
+                    <th>Time</th>
+                    <th>Room</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for session in sessions %}
+                    <tr>
+                        <td>{{ session.title }}</td>
+                        <td>{{ session.conference.title }}</td>
+                        <td>{{ session.startTime|date('d M Y H:i') }}</td>
+                        <td>{{ session.room.name }}</td>
+                        <td>
+                            <div class="actions">
+                                <a href="{{ path('admin_session_edit', {id: session.id}) }}">Edit</a>
+                                <form method="post" action="{{ path('admin_session_delete', {id: session.id}) }}" onsubmit="return confirm('Delete this session?');">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('delete_session_' ~ session.id) }}">
+                                    <button type="submit" class="button button-danger">Delete</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="5" class="meta">No sessions found.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

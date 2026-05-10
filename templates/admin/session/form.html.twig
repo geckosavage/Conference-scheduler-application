@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+    <div class="card" style="max-width: 880px;">
+        <h1>{{ title }}</h1>
+        {{ form_start(sessionForm) }}
+            {{ form_widget(sessionForm) }}
+            <button type="submit">Save Session</button>
+        {{ form_end(sessionForm) }}
+    </div>
+{% endblock %}
