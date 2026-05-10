@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Conference Scheduler{% endblock %}</title>
+    <link rel="stylesheet" href="{{ asset('assets/app.css') }}">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container nav-bar">
+            <a class="brand" href="{{ path('app_home') }}">Conference Scheduler</a>
+            <nav class="nav-links">
+                <a href="{{ path('conference_index') }}">Conferences</a>
+                <a href="{{ path('session_index') }}">Sessions</a>
+                <a href="{{ path('speaker_index') }}">Speakers</a>
+                {% if app.user %}
+                    <a href="{{ path('registration_schedule') }}">My Schedule</a>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a href="{{ path('admin_dashboard') }}">Admin</a>
+                    {% endif %}
+                    <a href="{{ path('app_logout') }}">Logout</a>
+                {% else %}
+                    <a href="{{ path('app_login') }}">Login</a>
+                    <a class="button-link" href="{{ path('app_register') }}">Register</a>
+                {% endif %}
+            </nav>
+        </div>
+    </header>
+
+    <main class="container page-content">
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="flash flash-{{ label }}">{{ message }}</div>
+            {% endfor %}
+        {% endfor %}
+
+        {% block body %}{% endblock %}
+    </main>
+</body>
+</html>
