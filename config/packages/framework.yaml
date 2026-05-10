@@ -1,0 +1,12 @@
+framework:
+    secret: '%env(APP_SECRET)%'
+    csrf_protection: true
+    form: true
+    http_method_override: true
+    session:
+        handler_id: null
+        cookie_secure: auto
+        cookie_samesite: lax
+    validation:
+        enable_annotations: true
+    default_locale: en

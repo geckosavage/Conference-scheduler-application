@@ -1,0 +1,154 @@
+app_home:
+    path: /
+    controller: App\Controller\HomeController::index
+
+app_login:
+    path: /login
+    controller: App\Controller\SecurityController::login
+
+app_logout:
+    path: /logout
+
+app_register:
+    path: /register
+    controller: App\Controller\SecurityController::register
+
+conference_index:
+    path: /conferences
+    controller: App\Controller\ConferenceController::index
+
+conference_show:
+    path: /conferences/{id}
+    controller: App\Controller\ConferenceController::show
+    requirements:
+        id: '\d+'
+
+conference_schedule:
+    path: /conferences/{id}/schedule
+    controller: App\Controller\ConferenceController::schedule
+    requirements:
+        id: '\d+'
+
+session_index:
+    path: /sessions
+    controller: App\Controller\SessionController::index
+
+session_show:
+    path: /sessions/{id}
+    controller: App\Controller\SessionController::show
+    requirements:
+        id: '\d+'
+
+speaker_index:
+    path: /speakers
+    controller: App\Controller\SpeakerController::index
+
+speaker_show:
+    path: /speakers/{id}
+    controller: App\Controller\SpeakerController::show
+    requirements:
+        id: '\d+'
+
+registration_create:
+    path: /register/session/{id}
+    controller: App\Controller\RegistrationController::create
+    requirements:
+        id: '\d+'
+
+registration_cancel:
+    path: /register/{id}/cancel
+    controller: App\Controller\RegistrationController::cancel
+    requirements:
+        id: '\d+'
+
+registration_schedule:
+    path: /my-schedule
+    controller: App\Controller\RegistrationController::mySchedule
+
+admin_dashboard:
+    path: /admin
+    controller: App\Controller\AdminController::dashboard
+
+admin_conference_index:
+    path: /admin/conferences
+    controller: App\Controller\AdminController::conferenceIndex
+
+admin_conference_new:
+    path: /admin/conferences/new
+    controller: App\Controller\AdminController::conferenceNew
+
+admin_conference_edit:
+    path: /admin/conferences/{id}/edit
+    controller: App\Controller\AdminController::conferenceEdit
+    requirements:
+        id: '\d+'
+
+admin_conference_delete:
+    path: /admin/conferences/{id}/delete
+    controller: App\Controller\AdminController::conferenceDelete
+    methods: [POST]
+    requirements:
+        id: '\d+'
+
+admin_session_index:
+    path: /admin/sessions
+    controller: App\Controller\AdminController::sessionIndex
+
+admin_session_new:
+    path: /admin/sessions/new
+    controller: App\Controller\AdminController::sessionNew
+
+admin_session_edit:
+    path: /admin/sessions/{id}/edit
+    controller: App\Controller\AdminController::sessionEdit
+    requirements:
+        id: '\d+'
+
+admin_session_delete:
+    path: /admin/sessions/{id}/delete
+    controller: App\Controller\AdminController::sessionDelete
+    methods: [POST]
+    requirements:
+        id: '\d+'
+
+admin_speaker_index:
+    path: /admin/speakers
+    controller: App\Controller\AdminController::speakerIndex
+
+admin_speaker_new:
+    path: /admin/speakers/new
+    controller: App\Controller\AdminController::speakerNew
+
+admin_speaker_edit:
+    path: /admin/speakers/{id}/edit
+    controller: App\Controller\AdminController::speakerEdit
+    requirements:
+        id: '\d+'
+
+admin_speaker_delete:
+    path: /admin/speakers/{id}/delete
+    controller: App\Controller\AdminController::speakerDelete
+    methods: [POST]
+    requirements:
+        id: '\d+'
+
+admin_room_index:
+    path: /admin/rooms
+    controller: App\Controller\AdminController::roomIndex
+
+admin_room_new:
+    path: /admin/rooms/new
+    controller: App\Controller\AdminController::roomNew
+
+admin_room_edit:
+    path: /admin/rooms/{id}/edit
+    controller: App\Controller\AdminController::roomEdit
+    requirements:
+        id: '\d+'
+
+admin_room_delete:
+    path: /admin/rooms/{id}/delete
+    controller: App\Controller\AdminController::roomDelete
+    methods: [POST]
+    requirements:
+        id: '\d+'
